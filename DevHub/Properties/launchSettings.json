@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DevHub (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "DevHub (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

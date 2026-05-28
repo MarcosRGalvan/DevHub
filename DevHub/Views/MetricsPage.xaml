@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="DevHub.Views.MetricsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DevHub.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Padding="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Métricas de Rendimiento" Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,24" />
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="24" VerticalAlignment="Top">
+
+            <Border Width="220" Height="220" Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="8">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="16">
+                    <TextBlock Text="Carga de la CPU" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" />
+
+                    <ProgressRing Value="{x:Bind ViewModel.CpuUsage, Mode=OneWay}"
+                                  IsIndeterminate="False" Width="90" />
+
+                    <TextBlock Text="{x:Bind ViewModel.CpuUsage, Mode=OneWay}"
+                               FontSize="14" HorizontalAlignment="Center" FontWeight="Medium" />
+                    
+                </StackPanel>
+            </Border>
+
+            <Border Width="220" Height="220" Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="8">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="16">
+                    <TextBlock Text="Memoria de la App" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" />
+
+                    <ProgressRing Value="{x:Bind ViewModel.RamPercentage, Mode=OneWay}"
+                                  IsIndeterminate="False" Width="90" Height="90"
+                                  Foreground="{ThemeResource SystemControlHighlightAccentBrush}"/>
+
+                    <TextBlock Text="{x:Bind ViewModel.RamUsageStr, Mode=OneWay}"
+                               FontSize="12" Foreground="{ThemeResource AccentTextFillColorSecondaryBrush}"
+                               HorizontalAlignment="Center" TextAlignment="Center"/>
+                </StackPanel>
+
+            </Border>
+        </StackPanel>
+    </Grid>
+</Page>

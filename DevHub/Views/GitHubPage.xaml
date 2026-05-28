@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="DevHub.Views.GitHubPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DevHub.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:models="using:DevHub.Models"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Padding="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="GitHub Repositories" Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,16"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8" Margin="0,0,0,24">
+            <TextBox Width="300" PlaceholderText="Introduce tu usuario de GitHub..."
+                     Text="{x:Bind ViewModel.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Buscar" Command="{x:Bind ViewModel.FetchReposCommand}" Style="{StaticResource AccentButtonStyle}"/>
+            <ProgressRing IsActive="{x:Bind ViewModel.IsBusy, Mode=OneWay}" Width="24" Height="24"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <GridView ItemsSource="{x:Bind ViewModel.Repositories, Mode=OneWay}" SelectionMode="None">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Repository">
+                        <Border Width="260" Height="140" Margin="0,0,8,8" Padding="16"
+                                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1" CornerRadius="8">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Text="{x:Bind Name}" FontWeight="SemiBold" FontSize="15" TextTrimming="CharacterEllipsis" />
+                                <TextBlock Grid.Row="1" Text="{x:Bind Description}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" TextTrimming="WordEllipsis" Margin="0,4,0,0"/>
+
+                                <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="12" Margin="0,4,0,0">
+                                    <StackPanel Orientation="Horizontal" Spacing="4">
+                                        <FontIcon Glyph="&#xE734;" FontSize="12"/><TextBlock Text="{x:Bind Stars}" FontSize="11"/>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <FontIcon Glyph="&#xE7BA;" FontSize="12"/>
+                                        <TextBlock Text="{x:Bind OpenIssues}" FontSize="11"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{x:Bind Language}" FontSize="11" FontStyle="Italic" HorizontalAlignment="Right"/>
+                                </StackPanel>
+                            </Grid>
+                            
+                        </Border>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </ScrollViewer>
+    </Grid>
+</Page>

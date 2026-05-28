@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+
+namespace DevHub.Models
+{
+    public class Repository
+    {
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
+
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = string.Empty;
+
+        [JsonPropertyName("description")]
+        public string Description { get; set; } = string.Empty;
+
+        [JsonPropertyName("stargazers_count")]
+        public int Stars { get; set; }
+
+        [JsonPropertyName("open_issues_count")]
+        public int OpenIssues { get; set; }
+
+        [JsonPropertyName("html_url")]
+        public string Url { get; set; } = string.Empty;
+
+        [JsonPropertyName("language")]
+        public string Language { get; set; } = string.Empty;
+    }
+}
