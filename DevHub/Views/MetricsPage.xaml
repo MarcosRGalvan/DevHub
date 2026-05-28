@@ -27,7 +27,7 @@
                     <TextBlock Text="Carga de la CPU" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" />
 
                     <ProgressRing Value="{x:Bind ViewModel.CpuUsage, Mode=OneWay}"
-                                  IsIndeterminate="False" Width="90" />
+                                  IsIndeterminate="False" Width="90" Height="90" />
 
                     <TextBlock Text="{x:Bind ViewModel.CpuUsage, Mode=OneWay}"
                                FontSize="14" HorizontalAlignment="Center" FontWeight="Medium" />
