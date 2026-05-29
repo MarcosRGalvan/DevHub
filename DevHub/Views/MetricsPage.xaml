@@ -15,7 +15,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Métricas de Rendimiento" Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,24" />
+        <TextBlock Grid.Row="0" Text="Métricas de Rendimiento del Sistema" Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,24" />
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="24" VerticalAlignment="Top">
 
@@ -40,7 +40,7 @@
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1" CornerRadius="8">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="16">
-                    <TextBlock Text="Memoria de la App" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                    <TextBlock Text="Memoria del Sistema" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" />
 
                     <ProgressRing Value="{x:Bind ViewModel.RamPercentage, Mode=OneWay}"
                                   IsIndeterminate="False" Width="90" Height="90"
@@ -50,7 +50,22 @@
                                FontSize="12" Foreground="{ThemeResource AccentTextFillColorSecondaryBrush}"
                                HorizontalAlignment="Center" TextAlignment="Center"/>
                 </StackPanel>
+            </Border>
 
+            <Border Width="200" Height="220" Padding="12" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="16">
+                    <TextBlock Text="GPU Interna (Intel Iris Graphycs)" TextWrapping="Wrap" TextAlignment="Center" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                    <ProgressRing Value="{x:Bind ViewModel.GpuIntegratedUsage, Mode=OneWay}" IsIndeterminate="False" Width="85" Height="85" Foreground="#FF107C41" />
+                    <TextBlock Text="{x:Bind ViewModel.GpuIntegratedUsage, Mode=OneWay}" FontSize="14" HorizontalAlignment="Center" FontWeight="Medium"/>
+                </StackPanel>
+            </Border>
+
+            <Border Width="200" Height="220" Padding="12" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="16">
+                    <TextBlock Text="GPU Dedicada (NVIDIA RTX A1000)" TextWrapping="Wrap" TextAlignment="Center" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                    <ProgressRing Value="{x:Bind ViewModel.GpuDedicatedUsage, Mode=OneWay}" IsIndeterminate="False" Width="85" Height="85" Foreground="#FFE81123"/>
+                    <TextBlock Text="{x:Bind ViewModel.GpuDedicatedUsage, Mode=OneWay}" FontSize="14" HorizontalAlignment="Center" FontWeight="Medium"/>
+                </StackPanel>
             </Border>
         </StackPanel>
     </Grid>
