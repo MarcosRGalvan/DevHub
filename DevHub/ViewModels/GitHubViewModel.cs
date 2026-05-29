@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +22,9 @@ namespace DevHub.ViewModels
         [ObservableProperty]
         private bool _isBusy;
 
+        [ObservableProperty]
+        private bool _showUserNotFoundAlert;
+
         public ObservableCollection<Repository> Repositories { get; } = new();
 
         public GitHubViewModel()
@@ -34,16 +38,33 @@ namespace DevHub.ViewModels
             if (string.IsNullOrWhiteSpace(Username)) return;
 
             IsBusy = true;
+            ShowUserNotFoundAlert = false;
             Repositories.Clear();
 
-            var repos = await _gitHubService.GetUserRepositoriesAsync(Username);
-
-            foreach (var repo in repos)
+            try
             {
-                Repositories.Add(repo);
-            }
+                var repos = await _gitHubService.GetUserRepositoriesAsync(Username);
 
-            IsBusy = false;
+                foreach (var repo in repos)
+                {
+                    Repositories.Add(repo);
+                }
+            }
+            catch (HttpRequestException)
+            {
+                Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread().TryEnqueue(() =>
+                {
+                    ShowUserNotFoundAlert = true;
+                });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error de comunicación: {ex.Message}");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }

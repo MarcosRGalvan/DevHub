@@ -25,15 +25,8 @@ namespace DevHub.Services
 
         public async Task<List<Repository>> GetUserRepositoriesAsync(string username)
         {
-            try
-            {
-                var response = await _httpClient.GetFromJsonAsync<List<Repository>>($"users/{username}/repos?sort=updated");
-                return response ?? new List<Repository>();
-            }
-            catch (Exception)
-            {
-                return new List<Repository>();
-            }
+            var response = await _httpClient.GetFromJsonAsync<List<Repository>>($"users/{username}/repos?sort=updated");
+            return response ?? new List<Repository>();
         }
     }
 }
